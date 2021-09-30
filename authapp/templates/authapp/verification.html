@@ -1,0 +1,28 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+<meta name="theme-color" content="#563d7c">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/signin.css' %}">
+{% endblock %}
+{% block container %}
+{% if user.is_authenticated %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong> Поздравляем! </strong>
+    Пользователь {{ user.username }} подтвержден.
+    <a type="button" class="close" data-dismiss="alert" aria-label="Close" href="{% url 'main:index' %}">
+        <span aria-hidden="true">&times;</span>
+    </a>
+</div>
+{% else %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong> Верификация не пройдена. </strong>
+    <a type="button" class="close" data-dismiss="alert" aria-label="Close" href="{% url 'main:index' %}"><span
+            aria-hidden="true">&times;</span></a>
+    <hr>
+    <a type="button" class="text-muted" href="{% url 'main:index' %}">
+        На главную</a>
+</div>
+{% endif %}
+{% endblock %}

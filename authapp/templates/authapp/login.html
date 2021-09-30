@@ -1,0 +1,50 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+<meta name="theme-color" content="#563d7c">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/signin.css' %}">
+{% endblock %}
+{% block container %}
+<form class="form-horizontal form-signin" method="post">
+    <a class="h1 mb-3 font-weight-bold text-dark" href="{% url 'main:index' %}">Xabr</a>
+    <h1 class="h3 mb-3 font-weight-normal">Пожалуйста авторизируйтесь</h1>
+    {% csrf_token %}
+    {% for error in login_form.non_field_errors %}
+    <div class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
+    </div>
+    {% endfor %}
+    <div class="form-group">
+        <label for="{{ login_form.username.id_for_label }}"></label>
+        {{ login_form.username }}
+    </div>
+    <div class="form-group">
+        <label for="{{ login_form.password.id_for_label }}"></label>
+        {{ login_form.password }}
+    </div>
+    <br>
+    <label>
+        <input type="checkbox" value="remember-me"> Запомнить меня
+    </label>
+    <input class="form-control btn btn-lg btn-primary btn-block" type="submit" value="Войти">
+    <a href="{% url 'auth:register' %}?next={{ request.path }}"
+       class="btn  btn-lg btn-primary btn-block">
+        Зарегистрироваться
+    </a>
+    {% if next == '/auth/register/' %}
+    <a href="{% url 'main:index' %}"
+       class="btn  btn-lg btn-primary btn-block">
+        Вернуться на главную
+    </a>
+    {% else %}
+    <a href="{{ next }}"
+       class="btn  btn-lg btn-primary btn-block">
+        Вернуться назад
+    </a>
+    {% endif %}
+    <p class="mt-4 mb-3 text-muted">&copy; 2020-{% now 'Y' %} Команда №1</p>
+</form>
+{% endblock %}
+

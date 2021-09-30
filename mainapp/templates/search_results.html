@@ -1,0 +1,26 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block main %}
+<div class="row">
+    <div class="col-md-12 ">
+        <h3 class="pb-4 mb-4 blog-main font-italic border-bottom">
+            Результаты поиска
+        </h3>
+        {% if not object_list %}
+        <p>Не найдено публикаций по вашему запросу<br>Попробуйте повторить запрос с другой формулировкой</p>
+        {% endif %}
+        {% for post in object_list %}
+        <div class="blog-post">
+            <h1 class="blog-post-title"><a href="{% url 'main:post' post.slug %}">{{ post.name }}</a></h1>
+            <p class="blog-post-meta">{{ post.create_datetime }} автор: {{ post.user|title }}</p>
+            <p>{{ post.description }}</p>
+            <nav class="blog-pagination">
+                <form action="{% url 'main:change_like' post.slug %}" method="post">
+                    <a class="btn btn-outline-primary" href="{% url 'main:post' post.slug %}">Читать далее</a>
+                </form>
+            </nav>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        {% block title %}
+            {{ page_title|title }}
+        {% endblock %}
+    </title>
+    {% block css %}
+        <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <style type="text/css">
+            #id_name, #id_slug {
+                width: 100%;
+            }
+
+            #id_description {
+                width: 100%;
+                height: 150px;
+            }
+
+            #id_posts_text {
+                width: 100%;
+                height: 400px;
+            }
+        </style>
+    {% endblock %}
+    {% block js %}
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/common.js' %}"></script>
+    {% endblock %}
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <header>
+                {% include 'mainapp/includes/inc__header.html' %}
+                {% include 'mainapp/includes/inc__main_menu.html' %}
+            </header>
+            <main role="main" class="flex-shrink-0">
+                <div class="container">
+                    {% block main %}
+                    {% endblock %}
+                </div>
+            </main>
+        </div>
+        <footer class="footer blog-footer text-center mt-auto py-3">
+            {% block footer %}
+                <div class="container">
+                    <p>&copy; 2020-{% now 'Y' %} Команда №1 </p>
+                    <a class="text-muted" href="{% url 'main:help' %}">Помощь</a>
+                </div>
+            {% endblock %}
+        </footer>
+    </div>
+</body>
+</html>

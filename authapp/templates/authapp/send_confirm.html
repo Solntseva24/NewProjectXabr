@@ -1,0 +1,21 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+<meta name="theme-color" content="#563d7c">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/signin.css' %}">
+{% endblock %}
+{% block container %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong> Сообщение подтверждения отправлено! </strong>
+    Проверьте письмо на почте и перейдите по ссылке указанной в письме.
+    <a type="button" class="close" data-dismiss="alert" aria-label="Close" href="{% url 'main:index' %}"><span
+            aria-hidden="true">&times;</span></a>
+    <hr>
+    <a type="button" class="text-muted" href="{% url 'main:index' %}">
+        На главную</a>
+</div>
+<br>
+<br>
+{% endblock %}

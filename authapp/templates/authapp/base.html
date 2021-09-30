@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>
+        {% block title %}
+        {{ title|title }}
+        {% endblock %}
+    </title>
+    {% block css %}
+    {% endblock %}
+    {% block js %}
+    <script src="{% static 'js/form-validation.js' %}"></script>
+    {% endblock %}
+</head>
+<body class="text-center bg-light">
+<div class="container">
+    {% block container %}
+    {% endblock %}
+</div>
+</body>
+</html>

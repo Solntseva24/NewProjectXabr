@@ -1,0 +1,67 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+{% load my_tags %}
+{% block css %}
+<link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/registration.css' %}">
+{% endblock %}
+{% block container %}
+<div class="py-5">
+    <a class="h1 mb-3 font-weight-bold text-dark" href="{% url 'main:index' %}">Xabr</a>
+    <h2>Профиль</h2>
+</div>
+<div class="media">
+    <img class="mr-3 " src="{{ user.avatar|media_folder_users }}" alt="">
+    <div class="media-body">
+        <form>
+            <div class="form-group">
+                <label for="username">Login</label>
+                <input type="text" class="form-control text-dark" id="username"
+                       placeholder="{{ user.username|title }}">
+            </div>
+            {% if user.first_name %}
+            <div class="form-group">
+                <label for="first_name">Имя</label>
+                <input type="text" class="form-control text-dark" id="first_name"
+                       placeholder="{{ user.first_name|title }}">
+            </div>
+            {% endif %}
+            {% if user.last_name %}
+            <div class="form-group">
+                <label for="last_name">Фамилия</label>
+                <input type="text" class="form-control" id="last_name"
+                       placeholder="{{ user.last_name|title }}">
+            </div>
+            {% endif %}
+            <div class="form-group">
+                <label for="staticEmail">Email</label>
+                <input type="text" class="form-control text-dark" id="staticEmail"
+                       placeholder="{{ user.email }}">
+            </div>
+            {% if user.age %}
+            <div class="form-group">
+                <label for="age">Возраст</label>
+                <input type="text" class="form-control" id="age"
+                       placeholder="{{ user.age }}">
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% if user.aboutMe %}
+<div class="form-group">
+    <label for="aboutMe">О себе</label>
+    <input type="text" class="form-control" id="aboutMe"
+           placeholder="{{ user.aboutMe }}">
+</div>
+{% endif %}
+<a class="btn btn-lg btn-primary form-control" href="{% url 'auth:edit' %}">
+    Редактировать профиль
+</a>
+<a class="mt-1 btn btn-lg btn-primary form-control" href="{% url 'main:index' %}">
+    На главную
+</a>
+<footer class="my-4 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2020-{% now 'Y' %} Команда №1</p>
+</footer>
+{% endblock %}
